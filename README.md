@@ -14,8 +14,10 @@ Aaron Aroch Ante Camacho -
 - flutter pub add intl
 - flutter pub add fl_chart
 - flutter pub add flutter_form_builder
+- flutter pub add form_builder_validators
 - flutter pub add animations
-- 
+
+
 ## DISEÑO
 - flutter pub add google_nav_bar
 - flutter pub add curved_navigation_bar

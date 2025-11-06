@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:u3_p2_checador_asistencia/Diseño/app_estilos.dart';
+import 'package:u3_p2_checador_asistencia/Ventas/control_asistencia.dart';
 
 import 'package:u3_p2_checador_asistencia/Ventas/gestion_horarios.dart';
 import 'package:u3_p2_checador_asistencia/Ventas/gestion_profesores.dart';
@@ -7,14 +8,7 @@ import 'package:u3_p2_checador_asistencia/Ventas/gestion_materias.dart';
 
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
-
-//MODELO DE LA CLASE "asistencia"
-//  idasistencia - Int, Primary Key, AutoIncrement
-//  nhorario - Int, Foreign Key
-//  fecha - Text
-//  Asistencia - Boolean
-
+import 'package:u3_p2_checador_asistencia/Ventas/graficos.dart';
 
 
 void main() {
@@ -47,7 +41,6 @@ class _ChecadorState extends State<Checador> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBody: true,
       appBar: AppBar(title: Text('$titulo\n$subtitulo'), centerTitle: true),
       body: ventanas(),
       bottomNavigationBar: CurvedNavigationBar(
@@ -108,11 +101,11 @@ class _ChecadorState extends State<Checador> {
   Widget ventanas() {
     switch (_index) {
       case 1:
-        return Card();
+        return AsistenciaPorProfesorChart();
       case 2:
         return ventanasGestion();
     }
-    return Card();
+    return ControlAsistencia();
   }
 
   Widget ventanasGestion() {
@@ -182,4 +175,8 @@ class _ChecadorState extends State<Checador> {
       ),
     );
   }
+
+
+
+
 }

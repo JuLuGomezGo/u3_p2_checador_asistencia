@@ -45,6 +45,7 @@ dependencies:
   awesome_dialog: ^3.3.0
   google_fonts: ^6.3.2
   flutter_slidable: ^4.0.3
+  form_builder_validators: ^11.2.0
 
 dev_dependencies:
   flutter_test:

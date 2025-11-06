@@ -204,7 +204,6 @@ class DB {
   static Future<List<Map<String, dynamic>>> getHistorialAsistenciaProfesor(
       String nprofesor) async {
     Database base = await _conectarDB();
-    // Esta consulta devuelve un JSON combinado con información de las 4 tablas
     final List<Map<String, dynamic>> maps = await base.rawQuery('''
       SELECT 
         P.NOMBRE,
@@ -220,6 +219,45 @@ class DB {
       WHERE P.NPROFESOR = ?
       ORDER BY A.FECHA DESC
     ''', [nprofesor]);
+
+    return maps;
+  }
+
+  static Future<List<Map<String, dynamic>>> mostrarHorariosDetallados() async {
+    Database base = await _conectarDB();
+    final List<Map<String, dynamic>> maps = await base.rawQuery('''
+      SELECT 
+        H.NHORARIO,
+        P.NOMBRE AS NOMBRE_PROFESOR,
+        M.DESCRIPCION AS DESCRIPCION_MATERIA,
+        H.HORA
+      FROM HORARIO H
+      JOIN PROFESOR P ON H.NPROFESOR = P.NPROFESOR
+      JOIN MATERIA M ON H.NMAT = M.NMAT
+      ORDER BY P.NOMBRE, H.HORA
+    ''');
+    return maps;
+  }
+
+  static Future<List<Map<String, dynamic>>> mostrarAsistenciasDetalladas() async {
+    Database base = await _conectarDB();
+    final List<Map<String, dynamic>> maps = await base.rawQuery('''
+      SELECT 
+        A.IDASISTENCIA,
+        A.NHORARIO,
+        A.FECHA,
+        A.ASISTENCIA,
+        P.NOMBRE AS NOMBRE_PROFESOR,
+        M.DESCRIPCION AS DESCRIPCION_MATERIA,
+        H.HORA,
+        H.EDIFICIO,
+        H.SALON
+      FROM ASISTENCIA A
+      JOIN HORARIO H ON A.NHORARIO = H.NHORARIO
+      JOIN PROFESOR P ON H.NPROFESOR = P.NPROFESOR
+      JOIN MATERIA M ON H.NMAT = M.NMAT
+      ORDER BY A.FECHA DESC
+    ''');
 
     return maps;
   }
